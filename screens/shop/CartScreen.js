@@ -5,10 +5,21 @@ import Colors from '../../constants/Colors';
 
 const CartScreen = () => {
 
-    const cart = useSelector(state => state.cart);
-    const {totalAmount, items} = cart;
-    console.log(totalAmount);
-    console.log(items);
+    const totalAmount = useSelector(state => state.cart.totalAmount);
+    const cartItems = useSelector(state => {
+        const transformedCartItems = [];
+        for (let key in state.cart.items) {
+            transformedCartItems.push({
+                productId: key,
+                productTitle: state.cart.items[key].productTitle,
+                productPrice: state.cart.items[key].productPrice,
+                quantity: state.cart.items[key].quatity,
+                sum: state.cart.items[key].sum
+            })
+        }
+        return transformedCartItems;
+    })
+
     return (
         <View>
             <Text>Cart Screen</Text>
