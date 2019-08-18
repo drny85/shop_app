@@ -1,40 +1,58 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, Button } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform } from 'react-native'
+import { Button, Divider } from 'react-native-elements'
+import Colors from '../../constants/Colors';
 
 const ProductItem = props => {
 
     const { image, title, price, viewDetail, addToCart } = props;
-    return (
-        <View style={styles.product}>
-            <Image source={{ uri: image }} style={styles.image} />
-            <View style={styles.details}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.price}>{price}</Text>
-            </View>
+    let Touchable = TouchableOpacity;
 
-            <View style={styles.buttonView}>
-                <Button title="View Details" onPress={viewDetail} />
-                <Button title="To Cart" onPress={addToCart} />
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        Touchable = TouchableNativeFeedback;
+    }
+    return (
+
+        <Touchable onPress={viewDetail} useForeground>
+            <View style={styles.product}>
+                <Image source={{ uri: image }} style={styles.image} />
+                <View style={styles.details}>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.price}>${price}</Text>
+                </View>
+
+                <View style={styles.buttonView}>
+                    <Button title="View Details" buttonStyle={styles.btnDetail} onPress={viewDetail} />
+                    <Button title="Add to Cart" buttonStyle={styles.btnCart} onPress={addToCart} />
+
+                </View>
             </View>
-        </View>
+            <Divider style={{ backgroundColor: 'grey', marginHorizontal: 10 }} />
+
+        </Touchable>
     )
 }
 
 const styles = StyleSheet.create({
     product: {
         shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.26,
+        shadowOffset: { width: 1, height: 2 },
+        shadowOpacity: 0.28,
         elevation: 5,
         borderRadius: 10,
         backgroundColor: 'white',
         margin: 20,
-        height: 300
+        height: 300,
+        overflow: 'hidden',
+
 
     },
     image: {
         width: '100%',
-        height: '60%'
+        height: '60%',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        overflow: 'hidden'
     },
     details: {
         height: '15%',
@@ -54,7 +72,18 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         height: '25%',
-        padding: 15
+        padding: 15,
+        marginTop: 10
+    },
+    btnCart: {
+
+        paddingHorizontal: 12,
+        backgroundColor: Colors.primary
+
+    },
+    btnDetail: {
+        paddingHorizontal: 10,
+        backgroundColor: Colors.primary
     }
 })
 
