@@ -1,7 +1,7 @@
 import { ADD_TO_CART } from '../actions/cart'
 import CardItem from '../../models/cart-item';
 
-initialState = {
+const initialState = {
     items: {},
     totalAmount: 0
 }
