@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import Colors from '../../constants/Colors';
 import { Button } from 'react-native-elements';
+import CartItem from '../../components/shop/CartItem';
 
 const CartScreen = ({ navigation }) => {
 
@@ -14,7 +15,7 @@ const CartScreen = ({ navigation }) => {
                 productId: key,
                 productTitle: state.cart.items[key].productTitle,
                 productPrice: state.cart.items[key].productPrice,
-                quantity: state.cart.items[key].quatity,
+                quantity: state.cart.items[key].quantity,
                 sum: state.cart.items[key].sum
             })
         }
@@ -29,9 +30,15 @@ const CartScreen = ({ navigation }) => {
     return (
         <View style={styles.screen}>
             <View style={styles.orderNow}>
-                <Text>Total ${totalAmount.toFixed(2)}</Text>
-                <Button title="Order Now" />
+                <Text style={{ color: Colors.primary }}>Total ${totalAmount.toFixed(2)}</Text>
+                <Button buttonStyle={{ backgroundColor: Colors.ascent, paddingHorizontal: 12 }} title="Order Now" />
             </View>
+            <FlatList data={cartItems}
+                keyExtractor={(item) => item.productId}
+                renderItem={({ item }) =>
+                    <CartItem title={item.productTitle} amount={item.sum} quantity={item.quantity} onRemove={() => { }} />
+                }
+            />
 
         </View>
     )
