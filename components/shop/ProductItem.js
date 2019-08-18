@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'white',
         margin: 20,
-        height: 300,
+        height: 350,
         overflow: 'hidden',
 
 
@@ -55,13 +55,14 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     details: {
-        height: '15%',
+        height: '20%',
         alignItems: 'center',
         padding: 10
     },
     title: {
         fontSize: 18,
-        marginVertical: 4
+        marginVertical: 4,
+        fontFamily: 'open-sans-bold'
     },
     price: {
         fontSize: 16,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        height: '25%',
+        height: '20%',
         padding: 15,
         marginTop: 10
     },
