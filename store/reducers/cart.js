@@ -17,8 +17,8 @@ export default (state = initialState, action) => {
                 // item is already in the cart
                 const updatedCartItem = new CardItem(
                     state.items[addedProduct.id].quantity + 1,
-                    productPrice,
                     productTitle,
+                    productPrice,
                     state.items[addedProduct.id].sum + productPrice
                 );
                 return {
